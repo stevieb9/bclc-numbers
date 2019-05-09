@@ -1,0 +1,11 @@
+input.invalid, textarea.invalid{
+    border: 2px solid red;
+}
+
+input.valid, textarea.valid{
+    border: 2px solid green;
+}
+
+.warning {
+    color: red;
+}

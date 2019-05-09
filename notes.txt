@@ -32,6 +32,7 @@
 * add toggle to subtract ticket price from total, so that if a ticket is $3,
   a 4/6 match will or will not be included (as $85 - $3 is not $85 or greater)
 * add password authentication functionality
+* add ability to read from CSV or DB
 
 # scoring
 
