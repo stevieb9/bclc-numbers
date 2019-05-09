@@ -28,5 +28,17 @@ sub new {
         }
     ) or die $DBI::errstr;
 
-    return $self->{db};
+    return $self;
+}
+
+sub db {
+    return $_[0]->{db};
+}
+
+sub retrieve {
+    my ($self, %args) = @_;
+
+    $self->db->prepare(
+        "SELECT * from $args{table} "
+    );
 }

@@ -38,6 +38,16 @@ $(document).ready(function() {
                 $("#submit_field_warning").hide();
             }
         }
+
+        $.ajax({
+            async: false,
+            type: 'GET',
+            url: '/fetch_data/' + JSON.stringify(lotto_nums),
+            success: function(data){
+                var json = $.parseJSON(data);
+                console.log(data);
+            }
+        });
     });
 });
 

@@ -17,6 +17,15 @@ get '/' => sub {
     return template 'main';
 };
 
+get '/fetch_data/:numbers' => sub {
+    my $numbers = from_json(param("numbers"));
+    return to_json fetch($numbers);
+};
+
+sub fetch {
+    my $numbers = shift;
+}
+
 1;
 
 __END__

@@ -17,11 +17,11 @@ is $obj_creation_ok, undef, "new() croaks if db name not sent in";
 
 $db = BCLC::Numbers::DB->new('data/649.db');
 
-isa_ok $db, 'DBI::db', "object is in the correct class";
+isa_ok $db, 'BCLC::Numbers::DB', "object is in the correct class";
 
 my $sth;
 
-$sth = $db->prepare(
+$sth = $db->db->prepare(
 #    "SELECT * FROM historical"
     "SELECT * FROM historical where [DRAW NUMBER] = ?"
 );
