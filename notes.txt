@@ -2,6 +2,38 @@
 # / denotes done/tests written
 # - denotes in progress
 
+# rules
+
 * six numbers, 1-49
 * no duplicates
 * only process sequence == 0
+* draw 1-2124 == $1 cost per ticket
+* draw 2125-2989 == $2 cost per ticket
+* draw 2990-3620 == $3 cost per ticket
+* only list wins that are $85 or more
+
+# data presentation
+
+* dates the numbers won ***more than*** $85
+
+# win amount table
+
+6/6  == $5,000,000
+5/6+ == $250,000
+5/6  == $3,000
+4/6  == $85
+3/6  == $10
+2/6+ == $5
+2/6  == $3
+
+# additions
+
+* add option to include the sequence != 0 rogue entries
+* add toggle to subtract ticket price from total, so that if a ticket is $3,
+  a 4/6 match will or will not be included (as $85 - $3 is not $85 or greater)
+
+# notes
+
+* data starts in 1982, there isn't any 1981 data
+* conflicting info: first line item states return dates with winnings
+  ``more than'' $85, but a latter note states "$85 or more"
