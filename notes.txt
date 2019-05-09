@@ -31,6 +31,15 @@
 * add option to include the sequence != 0 rogue entries
 * add toggle to subtract ticket price from total, so that if a ticket is $3,
   a 4/6 match will or will not be included (as $85 - $3 is not $85 or greater)
+* add password authentication functionality
+
+# scoring
+
+* 15: user can enter the six digits into UI
+* 10: ease of readibility of returned data
+* 10: does the page flow intuitively
+* 30: quality intuitive code, well documented, standard design
+* 20: good design, well organized, modular code
 
 # notes
 
