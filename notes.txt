@@ -40,6 +40,7 @@
 * 10: does the page flow intuitively
 * 30: quality intuitive code, well documented, standard design
 * 20: good design, well organized, modular code
+* 15: code tested
 
 # notes
 
