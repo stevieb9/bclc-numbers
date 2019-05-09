@@ -33,6 +33,8 @@
   a 4/6 match will or will not be included (as $85 - $3 is not $85 or greater)
 * add password authentication functionality
 * add ability to read from CSV or DB
+/ add user-side error checking for duplicate and out-of-range nums
+/ add identifiable validation to number input fields
 
 # scoring
 

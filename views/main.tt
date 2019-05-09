@@ -30,13 +30,16 @@
                 </div>
             </td>
         </tr>
+        <tr>
+            <td colspan="6" style="text-align: center;"><button type="submit" id="submit_button">Submit</button></td>
+        </tr>
     </table>
 
     <br><br>
 
     <div id="warning" class="warning">All numbers must be between 1 and 49, and must be unique!</div>
-    </div>
-
+    <div id="populate_warning" class="warning">All six fields must be populated before submitting!</div>
+    <div id="submit_field_warning" class="warning">One or more fields have errors. Ensure all numbers are unique, and are within the 1-49 range!</div>
 </body>
 </html>
 
