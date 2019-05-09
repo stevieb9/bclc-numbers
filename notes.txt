@@ -1,0 +1,7 @@
+# * denotes not done/started
+# / denotes done/tests written
+# - denotes in progress
+
+* six numbers, 1-49
+* no duplicates
+* only process sequence == 0
