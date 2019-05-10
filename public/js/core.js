@@ -8,9 +8,13 @@ $(document).ready(function() {
     var $populate_warning = $("#populate_warning");
     var $submit_field_warning = $("#submit_field_warning");
 
+    var $results_table = $("#results_table");
+
     $warning.hide();
     $populate_warning.hide();
     $submit_field_warning.hide();
+
+    $results_table.hide();
 
     $(".number_field").on("change", function(){
         $populate_warning.hide();
@@ -53,8 +57,22 @@ $(document).ready(function() {
             url: '/fetch_data/' + JSON.stringify(lotto_nums),
             success: function(data){
                 var json = $.parseJSON(data);
-                console.log(data);
-                alert(data);
+                //console.log(data);
+
+                jQuery.each(json, function(index, info){
+                    $("#results_table tr:last").after(
+                        "<tr>" +
+                        "<td>" + info["DRAW DATE"] + "</td>" +
+                        "<td>" + info["WIN_AMOUNT"] + "</td>" +
+                        "<td>" + info["DRAW NUMBER"] + "</td>" +
+                        "<td>" + info["NUMBER_MATCHES"] + "</td>" +
+                        "<td>" + info["BONUS_MATCH"] + "</td>" +
+                        "</tr>"
+                    );
+                });
+
+
+                $results_table.show();
             }
         });
     });

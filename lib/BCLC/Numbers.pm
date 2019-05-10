@@ -67,7 +67,7 @@ sub fetch {
         }
     }
 
-    print Dumper \@winning_draws;
+    return \@winning_draws;
 }
 
 sub _calculate_win_value {
