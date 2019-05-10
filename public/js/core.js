@@ -16,13 +16,6 @@ $(document).ready(function() {
 
     $results_table.hide();
 
-/* TEST SAVE CHANGED ELEMENT
-    $(".number_field").on('focusin', function(){
-        console.log("Saving value " + $(this).val());
-        $(this).data('val', $(this).val());
-    });
-*/
-
     $(".number_field").on("change", function(){
         $populate_warning.hide();
 
@@ -97,7 +90,7 @@ function validate_number(id, num){
     lotto_nums[id] = null;
 
     $.each(lotto_nums, function(k, v){
-        console.log(v === num);
+        console.log("compare: " + v === num);
         if (v === num){
             duplicate = true;
         }
