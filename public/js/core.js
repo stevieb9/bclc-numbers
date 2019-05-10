@@ -51,13 +51,14 @@ $(document).ready(function() {
             }
         }
 
+        $results_table.find("tr:gt(0)").remove();
+
         $.ajax({
             async: false,
             type: 'GET',
             url: '/fetch_data/' + JSON.stringify(lotto_nums),
             success: function(data){
                 var json = $.parseJSON(data);
-                //console.log(data);
 
                 jQuery.each(json, function(index, info){
                     $("#results_table tr:last").after(
