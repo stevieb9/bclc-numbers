@@ -33,7 +33,7 @@ sub fetch {
         numbers => $player_numbers,
     );
 
-    my @winning_draws;
+    my @all_draws;
 
     for my $draw (@$results){
         my %winning_numbers;
@@ -46,9 +46,8 @@ sub fetch {
 
         $bonus_number = $draw->{'BONUS NUMBER'};
 
-        my $match_count;
-        my $match_bonus;
-
+        my $match_count = 0;
+        my $match_bonus = 0;
 
         for my $player_number (@$player_numbers){
             if ($winning_numbers{$player_number}){
@@ -57,40 +56,81 @@ sub fetch {
             $match_bonus++ if $player_number == $bonus_number;
         }
 
-        if ($match_count >= 4){
-            $draw->{NUMBER_MATCHES} = $match_count;
-            $draw->{BONUS_MATCH} = $match_bonus;
+        $draw->{NUMBER_MATCHES} = $match_count;
+        $draw->{BONUS_MATCH} = $match_bonus;
 
+        if ($draw->{NUMBER_MATCHES}){
             $draw->{WIN_AMOUNT} = _calculate_win_value($draw);
+        }
 
+        push @all_draws, $draw;
+    }
+
+    my $aggregate_data = _tally_data(\@all_draws);
+
+    return $aggregate_data;
+}
+
+sub _tally_data {
+    my ($all_draws) = @_;
+
+    my @winning_draws;
+    my $total_number_payout;
+
+    for my $draw (@$all_draws) {
+
+        #FIXME: Tally ticket purchases here!
+
+        next if $draw->{NUMBER_MATCHES} < 2;
+
+        # running total of all wins
+
+        $total_number_payout += _draw_payout($draw);
+
+        # $85+
+
+        if ($draw->{NUMBER_MATCHES} >= 4){
             push @winning_draws, $draw;
         }
     }
 
-    return \@winning_draws;
+    my $data = {
+        winning_draws     => \@winning_draws,
+        total_number_payout => $total_number_payout,
+        total_draw_income => undef,
+    };
+
+    return $data;
+}
+
+sub _draw_payout {
+    my ($draw) = @_;
+    return _calculate_win_value($draw, 0);
 }
 
 sub _calculate_win_value {
-    my ($draw) = @_;
+    my ($draw, $dollar_value) = @_;
+
+    $dollar_value //= 1;
 
     my $payout_key = $draw->{NUMBER_MATCHES};
 
-    if ($payout_key == 2 || $payout_key == 5){
+    if ($payout_key && ($payout_key == 2 || $payout_key == 5)){
         $payout_key . '+' if $draw->{BONUS_MATCH};
     }
 
-    return $payout_table->{$payout_key};
+    return $payout_table->{$payout_key}[$dollar_value];
 }
 
 sub _payout_table {
     return {
-        '2'  => '$3',
-        '2+' => '$5',
-        '3'  => '$10',
-        '4'  => '$85',
-        '5'  => '$3,000',
-        '5+' => '$250,000',
-        '6'  => '$5,000,000',
+        '2'  => [3, '$3'],
+        '2+' => [5, '$5'],
+        '3'  => [10, '$10'],
+        '4'  => [85, '$85'],
+        '5'  => [3000, '$3,000'],
+        '5+' => [250000, '$250,000'],
+        '6'  => [5000000, '$5,000,000'],
     };
 }
 

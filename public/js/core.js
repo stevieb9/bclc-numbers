@@ -53,8 +53,6 @@ $(document).ready(function() {
 
         $results_table.find("tr:gt(0)").remove();
 
-        console.log(lotto_nums);
-
         $.ajax({
             async: true,
             type: 'GET',
@@ -62,14 +60,17 @@ $(document).ready(function() {
             success: function(data){
                 var json = $.parseJSON(data);
 
-                jQuery.each(json, function(index, info){
+                var winning_draws = json["winning_draws"];
+
+
+                jQuery.each(winning_draws, function(index, draw){
                     $("#results_table tr:last").after(
                         "<tr>" +
-                        "<td>" + info["DRAW DATE"] + "</td>" +
-                        "<td>" + info["WIN_AMOUNT"] + "</td>" +
-                        "<td>" + info["DRAW NUMBER"] + "</td>" +
-                        "<td>" + info["NUMBER_MATCHES"] + "</td>" +
-                        "<td>" + info["BONUS_MATCH"] + "</td>" +
+                        "<td>" + draw["DRAW DATE"] + "</td>" +
+                        "<td>" + draw["WIN_AMOUNT"] + "</td>" +
+                        "<td>" + draw["DRAW NUMBER"] + "</td>" +
+                        "<td>" + draw["NUMBER_MATCHES"] + "</td>" +
+                        "<td>" + draw["BONUS_MATCH"] + "</td>" +
                         "</tr>"
                     );
                 });
@@ -77,7 +78,6 @@ $(document).ready(function() {
                 $results_table.show();
             }
         });
-        console.log(Object.values(lotto_nums));
     });
 });
 
@@ -86,11 +86,9 @@ function validate_number(id, num){
 
     var duplicate = false;
 
-    console.log(id, num);
     lotto_nums[id] = null;
 
     $.each(lotto_nums, function(k, v){
-        console.log("compare: " + v === num);
         if (v === num){
             duplicate = true;
         }
