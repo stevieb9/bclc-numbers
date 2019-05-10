@@ -1,6 +1,6 @@
 "use strict";
 
-var lotto_nums = [];
+var lotto_nums = {};
 
 $(document).ready(function() {
 
@@ -16,12 +16,19 @@ $(document).ready(function() {
 
     $results_table.hide();
 
+/* TEST SAVE CHANGED ELEMENT
+    $(".number_field").on('focusin', function(){
+        console.log("Saving value " + $(this).val());
+        $(this).data('val', $(this).val());
+    });
+*/
+
     $(".number_field").on("change", function(){
         $populate_warning.hide();
 
         var number = $(this).val();
 
-        if (validate_number(number)){
+        if (validate_number($(this).attr("id"), number)){
             $(this).removeClass("invalid").addClass("valid");
             $warning.hide();
         }
@@ -53,10 +60,12 @@ $(document).ready(function() {
 
         $results_table.find("tr:gt(0)").remove();
 
+        console.log(lotto_nums);
+
         $.ajax({
-            async: false,
+            async: true,
             type: 'GET',
-            url: '/fetch_data/' + JSON.stringify(lotto_nums),
+            url: '/fetch_data/' + JSON.stringify(Object.values(lotto_nums)),
             success: function(data){
                 var json = $.parseJSON(data);
 
@@ -72,19 +81,30 @@ $(document).ready(function() {
                     );
                 });
 
-
                 $results_table.show();
             }
         });
+        console.log(Object.values(lotto_nums));
     });
 });
 
-function validate_number(num){
+function validate_number(id, num){
     var within_range = (num <= 49 && num >= 1);
-    var duplicate = lotto_nums.includes(num);
+
+    var duplicate = false;
+
+    console.log(id, num);
+    lotto_nums[id] = null;
+
+    $.each(lotto_nums, function(k, v){
+        console.log(v === num);
+        if (v === num){
+            duplicate = true;
+        }
+    });
 
     if (within_range && ! duplicate){
-        lotto_nums.push(num);
+        lotto_nums[id] = num;
         return true;
     }
 
