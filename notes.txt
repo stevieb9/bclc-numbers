@@ -26,16 +26,6 @@
 2/6+ == $5
 2/6  == $3
 
-# additions
-
-* add option to include the sequence != 0 rogue entries
-* add toggle to subtract ticket price from total, so that if a ticket is $3,
-  a 4/6 match will or will not be included (as $85 - $3 is not $85 or greater)
-* add password authentication functionality
-* add ability to read from CSV or DB
-/ add user-side error checking for duplicate and out-of-range nums
-/ add identifiable validation to number input fields
-
 # scoring
 
 * 15: user can enter the six digits into UI

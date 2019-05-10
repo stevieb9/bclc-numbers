@@ -38,7 +38,19 @@ sub db {
 sub retrieve {
     my ($self, %args) = @_;
 
-    $self->db->prepare(
-        "SELECT * from $args{table} "
-    );
+    my $table = $args{table};
+    my $numbers = $args{numbers};
+
+    my $stmt =
+        "SELECT * FROM $table WHERE " .
+        "[SEQUENCE NUMBER] = ?";
+#        "[SEQUENCE NUMBER] = ? AND " .
+#        "[NUMBER DRAWN 1] IN (" . join(", ", ('?') x @$numbers) . ")";
+
+    my $sth = $self->db->prepare($stmt);
+
+    #$sth->execute(0, @$numbers);
+    $sth->execute(0);
+
+    return $sth->fetchall_arrayref({});
 }
