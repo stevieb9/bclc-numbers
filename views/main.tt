@@ -65,6 +65,10 @@
             <td>Total Spent On Tickets:</td>
             <td><div id="total_spent_on_tickets"></div></td>
         </tr>
+        <tr>
+            <td>Net Win/Loss:</td>
+            <td><div id="net_win_loss"></div></td>
+        </tr>
     </table>
 
 </body>

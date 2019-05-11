@@ -68,6 +68,7 @@ $(document).ready(function() {
                 var winning_draws = json["winning_draws"];
                 var total_spent_on_tickets = json["total_spent_on_tickets"];
                 var total_number_payout = json["total_number_payout"];
+                var net_win_loss = json["net_win_loss"];
 
                 jQuery.each(winning_draws, function(index, draw){
                     $("#results_table tr:last").after(
@@ -90,6 +91,7 @@ $(document).ready(function() {
 
                 $("#total_won").text(total_number_payout);
                 $("#total_spent_on_tickets").text(total_spent_on_tickets);
+                $("#net_win_loss").text(net_win_loss);
 
                 $totals_table.show();
 

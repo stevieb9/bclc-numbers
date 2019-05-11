@@ -9,7 +9,7 @@ use BCLC::Numbers::DB;
 use Dancer2;
 use Dancer2::Core::Request;
 use Data::Dumper;
-use Number::Format qw(:subs);
+use Number::Format qw(:subs :vars);
 
 my $db_file = 'data/649.db';
 my $db = BCLC::Numbers::DB->new($db_file);
@@ -75,6 +75,7 @@ sub fetch {
 
 sub _convert_to_dollar {
     my ($int) = @_;
+
     return format_price($int, 2, '$');
 }
 
@@ -102,10 +103,14 @@ sub _tally_data {
         }
     }
 
+    my $net_win_loss
+      = _convert_to_dollar($total_number_payout - $total_spent_on_tickets);
+
     my $data = {
         winning_draws     => \@winning_draws,
         total_spent_on_tickets => _convert_to_dollar($total_spent_on_tickets),
         total_number_payout => _convert_to_dollar($total_number_payout),
+        net_win_loss => $net_win_loss,
         total_draw_income => undef,
     };
 
