@@ -58,7 +58,7 @@
 
     <table id="totals_table" border="1">
         <tr>
-            <td>Total Won:</td>
+            <td>Above Numbers Won:</td>
             <td><div id="total_won"></div></td>
         </tr>
         <tr>
