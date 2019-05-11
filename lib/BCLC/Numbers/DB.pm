@@ -39,12 +39,27 @@ sub retrieve {
     my ($self, %args) = @_;
 
     my $table = $args{table};
+    my $sequence = $args{sequence};
+    my $last_draw = $args{last_draw};
 
-    my $stmt = "SELECT * FROM $table WHERE [SEQUENCE NUMBER] = ?";
+    if (! defined $table){
+        croak "retrieve() requires a table name sent in...";
+    }
+
+    if (! defined $sequence){
+        croak "retrieve() requires a sequence number sent in...";
+    }
+
+    if (! defined $last_draw){
+        croak "retrieve() requires a last draw number sent in...";
+    }
+
+    my $stmt = "SELECT * FROM $table WHERE [SEQUENCE NUMBER] = ? " .
+               "AND [DRAW NUMBER] <= ?";
 
     my $sth = $self->db->prepare($stmt);
 
-    $sth->execute(0);
+    $sth->execute($sequence, $last_draw);
 
     return $sth->fetchall_arrayref({});
 }

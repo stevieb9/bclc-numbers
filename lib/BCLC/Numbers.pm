@@ -29,8 +29,9 @@ sub fetch {
     my $player_numbers = shift;
 
     my $results = $db->retrieve(
-        table   => 'historical',
-        numbers => $player_numbers,
+        table     => 'historical',
+        sequence  => 0,
+        last_draw => 3620,
     );
 
     my @all_draws;
