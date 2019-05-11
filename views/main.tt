@@ -61,6 +61,10 @@
             <td>Total Won:</td>
             <td><div id="total_won"></div></td>
         </tr>
+        <tr>
+            <td>Total Spent On Tickets:</td>
+            <td><div id="total_spent_on_tickets"></div></td>
+        </tr>
     </table>
 
 </body>

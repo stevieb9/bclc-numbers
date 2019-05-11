@@ -82,11 +82,12 @@ sub _tally_data {
     my ($all_draws) = @_;
 
     my @winning_draws;
+    my $total_spent_on_tickets;
     my $total_number_payout;
 
     for my $draw (@$all_draws) {
 
-        #FIXME: Tally ticket purchases here!
+        $total_spent_on_tickets += _ticket_price($draw);
 
         next if $draw->{NUMBER_MATCHES} < 2;
 
@@ -103,7 +104,8 @@ sub _tally_data {
 
     my $data = {
         winning_draws     => \@winning_draws,
-        total_number_payout => _convert_to_dollar($total_number_payout, 2, '$'),
+        total_spent_on_tickets => _convert_to_dollar($total_spent_on_tickets),
+        total_number_payout => _convert_to_dollar($total_number_payout),
         total_draw_income => undef,
     };
 
@@ -116,9 +118,7 @@ sub _draw_payout {
 }
 
 sub _calculate_win_value {
-    my ($draw, $dollar_value) = @_;
-
-    $dollar_value //= 1;
+    my ($draw) = @_;
 
     my $payout_key = $draw->{NUMBER_MATCHES};
 

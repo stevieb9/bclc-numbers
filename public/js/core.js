@@ -66,6 +66,7 @@ $(document).ready(function() {
                 var json = $.parseJSON(data);
 
                 var winning_draws = json["winning_draws"];
+                var total_spent_on_tickets = json["total_spent_on_tickets"];
                 var total_number_payout = json["total_number_payout"];
 
                 jQuery.each(winning_draws, function(index, draw){
@@ -88,6 +89,7 @@ $(document).ready(function() {
                 }
 
                 $("#total_won").text(total_number_payout);
+                $("#total_spent_on_tickets").text(total_spent_on_tickets);
 
                 $totals_table.show();
 
