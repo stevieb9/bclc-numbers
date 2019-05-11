@@ -89,7 +89,6 @@ $(document).ready(function() {
                     );
                 });
 
-                console.log(display_all.checked);
                 if (winning_draws.length > 0){
                     $results_table.show();
                 }
