@@ -60,7 +60,8 @@ sub fetch {
         $draw->{BONUS_MATCH} = $match_bonus;
 
         if ($draw->{NUMBER_MATCHES}){
-            $draw->{WIN_AMOUNT} = _calculate_win_value($draw);
+            $draw->{WIN_AMOUNT}
+              = _convert_to_dollar(_calculate_win_value($draw));
         }
 
         push @all_draws, $draw;
@@ -69,6 +70,11 @@ sub fetch {
     my $aggregate_data = _tally_data(\@all_draws);
 
     return $aggregate_data;
+}
+
+sub _convert_to_dollar {
+    my ($int) = @_;
+    return format_price($int, 2, '$');
 }
 
 sub _tally_data {
@@ -96,7 +102,7 @@ sub _tally_data {
 
     my $data = {
         winning_draws     => \@winning_draws,
-        total_number_payout => format_price($total_number_payout, 2, '$'),
+        total_number_payout => _convert_to_dollar($total_number_payout, 2, '$'),
         total_draw_income => undef,
     };
 
@@ -105,7 +111,7 @@ sub _tally_data {
 
 sub _draw_payout {
     my ($draw) = @_;
-    return _calculate_win_value($draw, 0);
+    return _calculate_win_value($draw);
 }
 
 sub _calculate_win_value {
@@ -119,18 +125,18 @@ sub _calculate_win_value {
         $payout_key . '+' if $draw->{BONUS_MATCH};
     }
 
-    return $payout_table->{$payout_key}[$dollar_value];
+    return $payout_table->{$payout_key};
 }
 
 sub _payout_table {
     return {
-        '2'  => [3, '$3'],
-        '2+' => [5, '$5'],
-        '3'  => [10, '$10'],
-        '4'  => [85, '$85'],
-        '5'  => [3000, '$3,000'],
-        '5+' => [250000, '$250,000'],
-        '6'  => [5000000, '$5,000,000'],
+        '2'  => 3,
+        '2+' => 5,
+        '3'  => 10,
+        '4'  => 85,
+        '5'  => 3000,
+        '5+' => 250000,
+        '6'  => 5000000,
     };
 }
 
