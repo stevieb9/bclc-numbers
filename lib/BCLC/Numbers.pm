@@ -3,13 +3,13 @@ package BCLC::Numbers;
 use strict;
 use warnings;
 
-use Data::Dumper;
-
 our $VERSION = '0.01';
 
 use BCLC::Numbers::DB;
 use Dancer2;
 use Dancer2::Core::Request;
+use Data::Dumper;
+use Number::Format qw(:subs);
 
 my $db_file = 'data/649.db';
 my $db = BCLC::Numbers::DB->new($db_file);
@@ -96,7 +96,7 @@ sub _tally_data {
 
     my $data = {
         winning_draws     => \@winning_draws,
-        total_number_payout => $total_number_payout,
+        total_number_payout => format_price($total_number_payout, 2, '$'),
         total_draw_income => undef,
     };
 

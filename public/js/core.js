@@ -10,6 +10,7 @@ $(document).ready(function() {
     var $no_results_warning = $("#no_results_warning");
 
     var $results_table = $("#results_table");
+    var $totals_table = $("#totals_table");
 
     $base_warning.hide();
     $populate_warning.hide();
@@ -17,6 +18,7 @@ $(document).ready(function() {
     $no_results_warning.hide();
 
     $results_table.hide();
+    $totals_table.hide();
 
     $(".number_field").on("change", function(){
         $populate_warning.hide();
@@ -64,7 +66,7 @@ $(document).ready(function() {
                 var json = $.parseJSON(data);
 
                 var winning_draws = json["winning_draws"];
-
+                var total_number_payout = json["total_number_payout"];
 
                 jQuery.each(winning_draws, function(index, draw){
                     $("#results_table tr:last").after(
@@ -84,6 +86,11 @@ $(document).ready(function() {
                 else {
                     $no_results_warning.show();
                 }
+
+                $("#total_won").text(total_number_payout);
+
+                $totals_table.show();
+
             }
         });
     });
