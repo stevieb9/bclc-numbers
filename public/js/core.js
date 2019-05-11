@@ -58,10 +58,17 @@ $(document).ready(function() {
 
         $results_table.find("tr:gt(0)").remove();
 
+        var display_all = $("#display_all");
+
+        var fetch_data_params = {
+            "numbers": Object.values(lotto_nums),
+            "display_all": display_all.prop("checked")
+        };
+
         $.ajax({
             async: true,
             type: 'GET',
-            url: '/fetch_data/' + JSON.stringify(Object.values(lotto_nums)),
+            url: '/fetch_data/' + JSON.stringify(fetch_data_params),
             success: function(data){
                 var json = $.parseJSON(data);
 
@@ -82,6 +89,7 @@ $(document).ready(function() {
                     );
                 });
 
+                console.log(display_all.checked);
                 if (winning_draws.length > 0){
                     $results_table.show();
                 }

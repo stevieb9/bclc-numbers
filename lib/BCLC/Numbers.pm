@@ -20,13 +20,17 @@ get '/' => sub {
     return template 'main';
 };
 
-get '/fetch_data/:numbers' => sub {
-    my $numbers = from_json(param("numbers"));
-    return to_json fetch($numbers);
+get '/fetch_data/:params' => sub {
+    my $params = from_json param("params");
+
+    my $numbers = $params->{numbers};
+    my $display_all = $params->{display_all};
+
+    return to_json fetch($numbers, $display_all);
 };
 
 sub fetch {
-    my $player_numbers = shift;
+    my ($player_numbers, $display_all) = @_;
 
     my $results = $db->retrieve(
         table     => 'historical',
@@ -68,7 +72,7 @@ sub fetch {
         push @all_draws, $draw;
     }
 
-    my $aggregate_data = _tally_data(\@all_draws);
+    my $aggregate_data = _tally_data(\@all_draws, $display_all);
 
     return $aggregate_data;
 }
@@ -80,7 +84,7 @@ sub _convert_to_dollar {
 }
 
 sub _tally_data {
-    my ($all_draws) = @_;
+    my ($all_draws, $display_all) = @_;
 
     my @winning_draws;
     my $total_spent_on_tickets;
@@ -98,7 +102,10 @@ sub _tally_data {
 
         # $85+
 
-        if ($draw->{NUMBER_MATCHES} >= 4){
+        if ($display_all){
+            push @winning_draws, $draw;
+        }
+        elsif ($draw->{NUMBER_MATCHES} >= 4){
             push @winning_draws, $draw;
         }
     }

@@ -10,6 +10,16 @@
 </head>
 
 <body>
+    <table>
+        <tr>
+            <th colspan="2" align="center">Options</th>
+        </tr>
+        <tr>
+            <td>Include wins less than $85:</td>
+            <td><input type="checkbox" id="display_all"></td>
+        </tr>
+    </table>
+
     <table class="top">
         <tr>
             <td>
