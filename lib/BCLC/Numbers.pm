@@ -129,6 +129,16 @@ sub _calculate_win_value {
     return $payout_table->{$payout_key};
 }
 
+sub _ticket_price {
+    my ($draw) = @_;
+
+    my $draw_number = $draw->{'DRAW NUMBER'};
+
+    return 1 if $draw_number <= 2124;
+    return 2 if $draw_number <= 2989;
+    return 3;
+}
+
 sub _payout_table {
     return {
         '2'  => 3,
