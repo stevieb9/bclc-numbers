@@ -4,15 +4,17 @@ var lotto_nums = {};
 
 $(document).ready(function() {
 
-    var $warning = $("#warning");
+    var $base_warning = $("#base_warning");
     var $populate_warning = $("#populate_warning");
     var $submit_field_warning = $("#submit_field_warning");
+    var $no_results_warning = $("#no_results_warning");
 
     var $results_table = $("#results_table");
 
-    $warning.hide();
+    $base_warning.hide();
     $populate_warning.hide();
     $submit_field_warning.hide();
+    $no_results_warning.hide();
 
     $results_table.hide();
 
@@ -23,19 +25,20 @@ $(document).ready(function() {
 
         if (validate_number($(this).attr("id"), number)){
             $(this).removeClass("invalid").addClass("valid");
-            $warning.hide();
+            $base_warning.hide();
         }
         else {
             $(this).removeClass("valid").addClass("invalid");
-            $warning.show();
+            $base_warning.show();
         }
     });
 
     $("#submit_button").click(function(event){
 
+        $base_warning.hide();
         $populate_warning.hide();
         $submit_field_warning.hide();
-        $warning.hide();
+        $no_results_warning.hide();
 
         var field_name_portion = "num";
 
@@ -75,7 +78,12 @@ $(document).ready(function() {
                     );
                 });
 
-                $results_table.show();
+                if (winning_draws.length > 0){
+                    $results_table.show();
+                }
+                else {
+                    $no_results_warning.show();
+                }
             }
         });
     });

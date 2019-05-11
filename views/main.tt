@@ -37,9 +37,10 @@
 
     <br><br>
 
-    <div id="warning" class="warning">All numbers must be between 1 and 49, and must be unique!</div>
+    <div id="base_warning" class="warning">All numbers must be between 1 and 49, and must be unique!</div>
     <div id="populate_warning" class="warning">All six fields must be populated before submitting!</div>
     <div id="submit_field_warning" class="warning">One or more fields have errors. Ensure all numbers are unique, and are within the 1-49 range!</div>
+    <div id="no_results_warning" class="warning">No tickets won $85 or more with these numbers.</div>
 
     <br><br>
 

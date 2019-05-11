@@ -26,6 +26,7 @@
 2/6+ == $5
 2/6  == $3
 
+
 # scoring
 
 * 15: user can enter the six digits into UI
@@ -40,3 +41,4 @@
 * data starts in 1982, there isn't any 1981 data
 * conflicting info: first line item states return dates with winnings
   ``more than'' $85, but a latter note states "$85 or more"
+* numbers with no results: 22 19 47 7 45 44
