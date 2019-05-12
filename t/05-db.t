@@ -87,7 +87,6 @@ isa_ok $db, 'BCLC::Numbers::DB', "object is in the correct class";
 
         $i++;
     }
-
 }
 
 done_testing();

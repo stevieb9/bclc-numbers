@@ -1,14 +1,13 @@
 package BCLC::Numbers;
 
-use strict;
 use warnings;
+use strict;
 
 our $VERSION = '0.01';
 
 use BCLC::Numbers::DB;
 use Dancer2;
 use Dancer2::Core::Request;
-use Data::Dumper;
 use Number::Format qw(:subs :vars);
 
 my $db_file = 'data/649.db';
@@ -90,10 +89,7 @@ sub fetch {
 
 sub _convert_to_dollar {
     my ($int) = @_;
-
-    $int //= 0;
-
-    return format_price($int, 2, '$');
+    return format_price($int //= 0, 2, '$');
 }
 
 sub _tally_data {
@@ -109,16 +105,13 @@ sub _tally_data {
 
         next if $draw->{NUMBER_MATCHES} < 2;
 
-        # running total of all wins
-
         $total_number_payout += _draw_payout($draw);
-
-        # $85+
 
         if ($display_all){
             push @winning_draws, $draw;
         }
         elsif ($draw->{NUMBER_MATCHES} >= 4){
+            # $85+
             push @winning_draws, $draw;
         }
     }

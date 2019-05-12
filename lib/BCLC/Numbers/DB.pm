@@ -19,8 +19,8 @@ sub new {
 
     $self->{db} = DBI->connect(
         "dbi:SQLite:dbname=$db_file",
-        "",
-        "",
+        '',
+        '',
         {
             #sqlite_use_immediate_transaction => 1,
             #sqlite_see_if_its_a_number => 1,

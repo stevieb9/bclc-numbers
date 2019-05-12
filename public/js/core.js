@@ -12,6 +12,7 @@ var totals_table;
 var display_all;
 
 $(document).ready(function(){
+
     base_warning = $("#base_warning");
     populate_warning = $("#populate_warning");
     no_results_warning = $("#no_results_warning");
@@ -20,6 +21,8 @@ $(document).ready(function(){
     totals_table = $("#totals_table");
 
     display_all = $("#display_all");
+
+    // hide all warnings and tables
 
     base_warning.hide();
     populate_warning.hide();
@@ -53,6 +56,7 @@ $(document).ready(function(){
 function display_data () {
 
     if (Object.keys(lotto_nums).length === 6) {
+
         var field_name_portion = "num";
 
         for (var i=1; i<7; i++){
@@ -67,16 +71,16 @@ function display_data () {
 
         results_table.find("tr:gt(0)").remove();
 
-
         var fetch_data_params = {
-            "numbers": Object.values(lotto_nums),
-            "display_all": display_all.prop("checked")
+            "numbers":      Object.values(lotto_nums),
+            "display_all":  display_all.prop("checked")
         };
 
         $.ajax({
             async: true,
             type: 'GET',
             url: '/fetch_data/' + JSON.stringify(fetch_data_params),
+
             success: function (data) {
                 var json = $.parseJSON(data);
 
