@@ -4,7 +4,7 @@ use warnings;
 use strict;
 
 use Carp qw(croak);
-use DBI;
+use DBI qw(:sql_types);
 
 our $VERSION = '0.01';
 
@@ -23,6 +23,7 @@ sub new {
         "",
         {
             #sqlite_use_immediate_transaction => 1,
+            #sqlite_see_if_its_a_number => 1,
             RaiseError => $self->{db_err},
             AutoCommit => 1
         }
@@ -39,27 +40,14 @@ sub retrieve {
     my ($self, %args) = @_;
 
     my $table = $args{table};
-    my $sequence = $args{sequence};
-    my $last_draw = $args{last_draw};
 
     if (! defined $table){
         croak "retrieve() requires a table name sent in...";
     }
 
-    if (! defined $sequence){
-        croak "retrieve() requires a sequence number sent in...";
-    }
+    my $sth = $self->db->prepare("SELECT * FROM $table");
 
-    if (! defined $last_draw){
-        croak "retrieve() requires a last draw number sent in...";
-    }
-
-    my $stmt = "SELECT * FROM $table WHERE [SEQUENCE NUMBER] = ? " .
-               "AND [DRAW NUMBER] <= ?";
-
-    my $sth = $self->db->prepare($stmt);
-
-    $sth->execute($sequence, $last_draw);
+    $sth->execute;
 
     return $sth->fetchall_arrayref({});
 }

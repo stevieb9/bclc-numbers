@@ -29,18 +29,29 @@ get '/fetch_data/:params' => sub {
     return to_json fetch($numbers, $display_all);
 };
 
+sub _filter {
+    my ($draw) = @_;
+
+    if ($draw->{'SEQUENCE NUMBER'} != 0 || $draw->{'DRAW NUMBER'} > 3620){
+        return 1;
+    }
+
+    return 0;
+}
+
 sub fetch {
     my ($player_numbers, $display_all) = @_;
 
     my $results = $db->retrieve(
         table     => 'historical',
-        sequence  => 0,
-        last_draw => 3620,
     );
 
     my @all_draws;
 
     for my $draw (@$results){
+
+        next if _filter($draw);
+
         my %winning_numbers;
         my $bonus_number;
 
@@ -79,6 +90,8 @@ sub fetch {
 
 sub _convert_to_dollar {
     my ($int) = @_;
+
+    $int //= 0;
 
     return format_price($int, 2, '$');
 }
