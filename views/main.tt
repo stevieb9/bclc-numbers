@@ -16,9 +16,11 @@
         </tr>
         <tr>
             <td><input type="checkbox" id="display_all"></td>
-            <td>Include wins less than $85:</td>
+            <td>Include wins less than $85</td>
         </tr>
     </table>
+
+    <br><br><br>
 
     <table class="top">
         <tr>
@@ -40,8 +42,11 @@
                 </div>
             </td>
         </tr>
+        <tr></tr>
+        <tr></tr>
+        <tr></tr>
         <tr>
-            <td colspan="6" style="text-align: center;"><button type="submit" id="submit_button">Submit</button></td>
+            <td colspan="6" align="center"><button onClick="window.location.href=window.location.href">Reset/Clear</button></td>
         </tr>
     </table>
 
@@ -49,7 +54,6 @@
 
     <div id="base_warning" class="warning">All numbers must be between 1 and 49, and must be unique!</div>
     <div id="populate_warning" class="warning">All six fields must be populated before submitting!</div>
-    <div id="submit_field_warning" class="warning">One or more fields have errors. Ensure all numbers are unique, and are within the 1-49 range!</div>
     <div id="no_results_warning" class="warning">No tickets won $85 or more with these numbers.</div>
 
     <br><br>
