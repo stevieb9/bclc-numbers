@@ -2,16 +2,24 @@
 
 var lotto_nums = {};
 
+var base_warning;
+var populate_warning;
+var no_results_warning;
+
+var results_table;
+var totals_table;
+
+var display_all;
+
 $(document).ready(function(){
+    base_warning = $("#base_warning");
+    populate_warning = $("#populate_warning");
+    no_results_warning = $("#no_results_warning");
 
-    var base_warning = $("#base_warning");
-    var populate_warning = $("#populate_warning");
-    var no_results_warning = $("#no_results_warning");
+    results_table = $("#results_table");
+    totals_table = $("#totals_table");
 
-    var results_table = $("#results_table");
-    var totals_table = $("#totals_table");
-
-    var display_all = $("#display_all");
+    display_all = $("#display_all");
 
     base_warning.hide();
     populate_warning.hide();
@@ -34,15 +42,15 @@ $(document).ready(function(){
             base_warning.show();
         }
 
-        display_data(results_table, totals_table, display_all);
+        display_data();
     });
 
     display_all.on("change", function(){
-        display_data(results_table, totals_table, display_all);
+        display_data();
     });
 });
 
-function display_data (results_table, totals_table, display_all) {
+function display_data () {
 
     if (Object.keys(lotto_nums).length === 6) {
         var field_name_portion = "num";
