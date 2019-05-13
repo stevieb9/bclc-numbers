@@ -1,0 +1,226 @@
+<?xml version="1.0" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title></title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<link rev="made" href="mailto:spek@scelia.(none)" />
+</head>
+
+<body>
+
+
+
+<ul id="index">
+  <li><a href="#NAME">NAME</a></li>
+  <li><a href="#DESCRIPTION">DESCRIPTION</a></li>
+  <li><a href="#REST-ROUTES">REST ROUTES</a>
+    <ul>
+      <li><a href="#pod">/</a></li>
+      <li><a href="#fetch_data-:params">/fetch_data/:params</a></li>
+    </ul>
+  </li>
+  <li><a href="#FUNCTIONS">FUNCTIONS</a>
+    <ul>
+      <li><a href="#convert_to_dollar-int">convert_to_dollar($int)</a></li>
+      <li><a href="#fetch_data-player_numbers-display_all-csv_source">fetch_data($player_numbers, $display_all, $csv_source)</a></li>
+      <li><a href="#filter-draw">filter($draw)</a></li>
+      <li><a href="#payout_table">payout_table</a></li>
+      <li><a href="#ticket_price-draw">ticket_price($draw)</a></li>
+    </ul>
+  </li>
+  <li><a href="#PRIVATE-FUNCTIONS">PRIVATE FUNCTIONS</a>
+    <ul>
+      <li><a href="#calculate_win_value-draw">_calculate_win_value($draw)</a></li>
+      <li><a href="#compile_data-all_draws-display_all">_compile_data($all_draws, $display_all)</a></li>
+      <li><a href="#draw_payout-draw">_draw_payout($draw)</a></li>
+    </ul>
+  </li>
+  <li><a href="#AUTHOR">AUTHOR</a></li>
+  <li><a href="#LICENSE-AND-COPYRIGHT">LICENSE AND COPYRIGHT</a></li>
+  <li><a href="#POD-ERRORS">POD ERRORS</a></li>
+</ul>
+
+<h1 id="NAME">NAME</h1>
+
+<p>BCLC::Numbers - Calculate Lotto 649 historical win information</p>
+
+<h1 id="DESCRIPTION">DESCRIPTION</h1>
+
+<p>Using historical data (CSV or SQLite database), calculate and display win information based on six unique numbers entered via a web UI.</p>
+
+<h1 id="REST-ROUTES">REST ROUTES</h1>
+
+<h2 id="pod">/</h2>
+
+<p>Landing page. Loads up the <code>main</code> <a>Template::Toolkit</a> template that provides the number inputs and various options.</p>
+
+<p>This route is a <code>get</code> request.</p>
+
+<p>Takes no parameters, has no return.</p>
+
+<h2 id="fetch_data-:params">/fetch_data/:params</h2>
+
+<p>This route front-ends the core workload of the application. It fetches and returns all calculated draw information based on the numbers provided.</p>
+
+<p>Parameters:</p>
+
+<p>All parameters are passed in as a JSON string, converted to a Perl hash.</p>
+
+<pre><code>    numbers =&gt; [1, 2, 3, 4, 5, 6]</code></pre>
+
+<p>Six unique numbers within the range 1-49. Will <code>croak()</code> if any of the numbers are out of range, or non-unique.</p>
+
+<pre><code>    display_all =&gt; bool</code></pre>
+
+<p>By default, only wins $85 or higher will be displayed in the UI. Set this to true to have all wins regardless of the value displayed on-screen.</p>
+
+<p>Default: false</p>
+
+<pre><code>    csv_source =&gt; bool</code></pre>
+
+<p>This software has the optional ability to read directly from the CSV file provided by BCLC, or an SQLite database containing the same data. Set this param to <code>true</code> to use the CSV reader.</p>
+
+<p>Default: false</p>
+
+<h1 id="FUNCTIONS">FUNCTIONS</h1>
+
+<h2 id="convert_to_dollar-int">convert_to_dollar($int)</h2>
+
+<p>Using <a>Number::Format</a> convert an integer into a properly formatted dollar string (eg: <code>3000</code> becomes <code>$3,000.00</code>).</p>
+
+<p>Parameters:</p>
+
+<pre><code>    $int</code></pre>
+
+<p>Mandatory, Integer (or float): The integer or float you want converted to a dollar string.</p>
+
+<p>Return: Formatted dollar string.</p>
+
+<h2 id="fetch_data-player_numbers-display_all-csv_source">fetch_data($player_numbers, $display_all, $csv_source)</h2>
+
+<p>Fetches, compiles, filters and aggregates all draw data.</p>
+
+<p>Parameters:</p>
+
+<pre><code>    $player_numbers</code></pre>
+
+<p>Mandatory, Array Reference: An array reference of the six unique lotto numbers between <code>1</code> and <code>49</code>.</p>
+
+<pre><code>    $display_all</code></pre>
+
+<p>Optional, bool: Set this to true to have all wins returned. By default, we only calculate wins <code>$85</code> or more as valid. Defaults to <code>true</code> (<code>1</code>).</p>
+
+<pre><code>    $csv_source</code></pre>
+
+<p>Optional, bool: Set to <code>true</code> (<code>1</code>), and we&#39;ll read our draw information from BCLC&#39;s Lotto 649 historical CSV file directly. Send in <code>false</code> (<code>0</code>) to read from a pre-compiled SQLite database containing the contents of the CSV. Defaults to <code>true</code>.</p>
+
+<h2 id="filter-draw">filter($draw)</h2>
+
+<p>Performs any/all necessary filtering of draws from the aggregate pool.</p>
+
+<p>Parameters:</p>
+
+<pre><code>    $draw</code></pre>
+
+<p>Mandatory, hash reference: A Lotto 649 draw hash reference as returned within the array reference from the <code>retrieve()</code> function from either <a>BCLC::DB</a> or <a>BCLC::CSV</a>.</p>
+
+<p>Return: <code>1</code> (<code>true</code>) if the draw sent in should be filtered out/skipped, and <code>0</code> (<code>false) if it&#39;s a valid draw.</code></p>
+
+<h2 id="payout_table">payout_table</h2>
+
+<p>Returns a hash reference where the keys are the possible number match combinations, and the values the dollar amount for each.</p>
+
+<p>Takes no parameters.</p>
+
+<p>Return: Hash Reference</p>
+
+<h2 id="ticket_price-draw">ticket_price($draw)</h2>
+
+<p>Calculates the price of a ticket for an individual draw.</p>
+
+<p>Parameters:</p>
+
+<pre><code>    $draw</code></pre>
+
+<p>Mandatory, hash reference: A Lotto 649 draw hash reference as returned within the array reference from the <code>retrieve()</code> function from either <a>BCLC::DB</a> or <a>BCLC::CSV</a>.</p>
+
+<p>Return, Integer: The cost of an individual draw&#39;s ticket.</p>
+
+<h1 id="PRIVATE-FUNCTIONS">PRIVATE FUNCTIONS</h1>
+
+<h2 id="calculate_win_value-draw">_calculate_win_value($draw)</h2>
+
+<p>Calculates the win value of a single draw.</p>
+
+<p>Parameters:</p>
+
+<pre><code>    $draw</code></pre>
+
+<p>Mandatory, hash reference: A Lotto 649 draw hash reference as returned within the array reference from the <code>retrieve()</code> function from either <a>BCLC::DB</a> or <a>BCLC::CSV</a>.</p>
+
+<p>Return: An integer representing the dollar amount of the win for the draw specified. Returns <code>0</code> if no wins resulted.</p>
+
+<h2 id="compile_data-all_draws-display_all">_compile_data($all_draws, $display_all)</h2>
+
+<p>Compiles all the various data related to all draws.</p>
+
+<p>Parameters:</p>
+
+<pre><code>    $all_draws</code></pre>
+
+<p>Mandatory, Array of Hashes: An array containing the full list of all draws as returned by the <code>retrieve()</code> method in <a>BCLC::DB</a> or <a>BCLC::CSV</a>.</p>
+
+<pre><code>    $display_all</code></pre>
+
+<p>Optional, bool: Send in a true value (eg <code>1</code>) to have all wins compiled as opposed to the default wins of $85 or higher. Defaults to false.</p>
+
+<p>Return: A hash reference in the following format:</p>
+
+<pre><code>    winning_draws           =&gt; \@winning_draws,
+    total_spent_on_tickets  =&gt; convert_to_dollar($total_spent_on_tickets),
+    total_number_payout     =&gt; convert_to_dollar($total_number_payout),
+    net_win_loss            =&gt; $net_win_loss,</code></pre>
+
+<h2 id="draw_payout-draw">_draw_payout($draw)</h2>
+
+<p>Returns the calculated payout of an individual draw.</p>
+
+<p>Parameters:</p>
+
+<pre><code>    $draw</code></pre>
+
+<p>Mandatory, hash reference: A Lotto 649 draw hash reference as returned within the array reference from the <code>retrieve()</code> function from either <a>BCLC::DB</a> or <a>BCLC::CSV</a>.</p>
+
+<p>Return: Integer, the dollar amount won in the draw.</p>
+
+<h1 id="AUTHOR">AUTHOR</h1>
+
+<p>Steve Bertrand, <code>&lt;steve.bertrand at gmail.com&gt;</code></p>
+
+<h1 id="LICENSE-AND-COPYRIGHT">LICENSE AND COPYRIGHT</h1>
+
+<p>Copyright 2019 Steve Bertrand.</p>
+
+<p>Released under the Apache License, Version 2</p>
+
+<h1 id="POD-ERRORS">POD ERRORS</h1>
+
+<p>Hey! <b>The above document had some coding errors, which are explained below:</b></p>
+
+<dl>
+
+<dt id="Around-line-295">Around line 295:</dt>
+<dd>
+
+<p>Unterminated C&lt;...&gt; sequence</p>
+
+</dd>
+</dl>
+
+
+</body>
+
+</html>
+
+
