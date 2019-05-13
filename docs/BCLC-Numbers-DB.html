@@ -1,0 +1,91 @@
+<?xml version="1.0" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title></title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<link rev="made" href="mailto:spek@scelia.(none)" />
+</head>
+
+<body>
+
+
+
+<ul id="index">
+  <li><a href="#NAME">NAME</a></li>
+  <li><a href="#DESCRIPTION">DESCRIPTION</a></li>
+  <li><a href="#METHODS">METHODS</a>
+    <ul>
+      <li><a href="#new-db_file">new($db_file)</a></li>
+      <li><a href="#retrieve-args">retrieve(%args)</a></li>
+    </ul>
+  </li>
+  <li><a href="#PRIVATE-METHODS">PRIVATE METHODS</a>
+    <ul>
+      <li><a href="#db">_db</a></li>
+    </ul>
+  </li>
+  <li><a href="#AUTHOR">AUTHOR</a></li>
+  <li><a href="#LICENSE-AND-COPYRIGHT">LICENSE AND COPYRIGHT</a></li>
+</ul>
+
+<h1 id="NAME">NAME</h1>
+
+<p>BCLC::Numbers::DB - Provides database backend support for <a>BCLC::Numbers</a> <a>Dancer2</a> web application</p>
+
+<h1 id="DESCRIPTION">DESCRIPTION</h1>
+
+<p>Object Oriented module that provides database access for <a>BCLC::Numbers</a></p>
+
+<h1 id="METHODS">METHODS</h1>
+
+<h2 id="new-db_file">new($db_file)</h2>
+
+<p>Instantiates and returns a new <a>BCLC::Numbers::DB</a> object, ready to process requests.</p>
+
+<p>Parameters:</p>
+
+<pre><code>    $db_file</code></pre>
+
+<p>Mandatory, String: The path and file name of the SQLite database file.</p>
+
+<p>Return: An object of class <a>BCLC::Numbers::DB</a></p>
+
+<h2 id="retrieve-args">retrieve(%args)</h2>
+
+<p>Compiles the entire Lotto 649 historical draw information.</p>
+
+<p>Parameters:</p>
+
+<p>All parameters are sent in as a hash.</p>
+
+<pre><code>    table =&gt; &#39;table_name&#39;</code></pre>
+
+<p>Mandatory, String: The name of the database table to operate on.</p>
+
+<p>Return: An Array Reference of Hash References, where each hash ref contains the dataset&#39;s column name as the key, and its associated value as the value.</p>
+
+<h1 id="PRIVATE-METHODS">PRIVATE METHODS</h1>
+
+<h2 id="db">_db</h2>
+
+<p>Returns the SQLite database connected object stored within the object.</p>
+
+<p>Takes no parameters.</p>
+
+<h1 id="AUTHOR">AUTHOR</h1>
+
+<p>Steve Bertrand, <code>&lt;steve.bertrand at gmail.com&gt;</code></p>
+
+<h1 id="LICENSE-AND-COPYRIGHT">LICENSE AND COPYRIGHT</h1>
+
+<p>Copyright 2019 Steve Bertrand.</p>
+
+<p>Released under the Apache License, Version 2</p>
+
+
+</body>
+
+</html>
+
+
