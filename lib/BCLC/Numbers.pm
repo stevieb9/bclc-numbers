@@ -11,6 +11,11 @@ use Dancer2;
 use Dancer2::Core::Request;
 use Number::Format qw(:subs :vars);
 
+use constant {
+    MAX_DRAW_NUMBER       => 3620,
+    VALID_SEQUENCE_NUMBER => => 0,
+};
+
 my $db_file = 'data/649.db';
 my $csv_file = 'data/649.csv';
 
@@ -97,7 +102,8 @@ sub fetch_data {
 sub filter {
     my ($draw) = @_;
 
-    if ($draw->{'SEQUENCE NUMBER'} != 0 || $draw->{'DRAW NUMBER'} > 3620){
+    if ($draw->{'SEQUENCE NUMBER'} != VALID_SEQUENCE_NUMBER
+        || $draw->{'DRAW NUMBER'} > MAX_DRAW_NUMBER){
         return 1;
     }
 
