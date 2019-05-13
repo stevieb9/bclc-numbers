@@ -73,7 +73,8 @@ function display_data () {
 
         var fetch_data_params = {
             "numbers":      Object.values(lotto_nums),
-            "display_all":  display_all.prop("checked")
+            "display_all":  display_all.prop("checked"),
+            "csv_source":   $("#data_source").val() === "csv"
         };
 
         $.ajax({

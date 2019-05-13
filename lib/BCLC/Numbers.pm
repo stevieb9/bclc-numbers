@@ -5,12 +5,16 @@ use strict;
 
 our $VERSION = '0.01';
 
+use BCLC::Numbers::CSV;
 use BCLC::Numbers::DB;
 use Dancer2;
 use Dancer2::Core::Request;
 use Number::Format qw(:subs :vars);
 
 my $db_file = 'data/649.db';
+my $csv_file = 'data/649.csv';
+
+my $csv = BCLC::Numbers::CSV->new($csv_file);
 my $db = BCLC::Numbers::DB->new($db_file);
 
 my $payout_table = payout_table();
@@ -24,8 +28,9 @@ get '/fetch_data/:params' => sub {
 
     my $numbers = $params->{numbers};
     my $display_all = $params->{display_all};
+    my $csv_source = $params->{csv_source};
 
-    return to_json fetch_data($numbers, $display_all);
+    return to_json fetch_data($numbers, $display_all, $csv_source);
 };
 
 sub calculate_win_value {
@@ -91,13 +96,22 @@ sub draw_payout {
 }
 
 sub fetch_data {
-    my ($player_numbers, $display_all) = @_;
+    my ($player_numbers, $display_all, $csv_source) = @_;
 
-    my $results = $db->retrieve(table => 'historical');
+    $csv_source //= 1;
 
-    my @all_draws;
+    my $draws;
 
-    for my $draw (@$results){
+    if ($csv_source){
+        $draws = $csv->retrieve;
+    }
+    else {
+        $draws = $db->retrieve(table => 'historical');
+    }
+
+    my @valid_draws;
+
+    for my $draw (@$draws){
 
         next if filter($draw);
 
@@ -129,10 +143,10 @@ sub fetch_data {
               = convert_to_dollar(calculate_win_value($draw));
         }
 
-        push @all_draws, $draw;
+        push @valid_draws, $draw;
     }
 
-    my $aggregate_data = compile_data(\@all_draws, $display_all);
+    my $aggregate_data = compile_data(\@valid_draws, $display_all);
 
     return $aggregate_data;
 }

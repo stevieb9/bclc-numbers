@@ -18,6 +18,15 @@
             <td><input type="checkbox" id="display_all"></td>
             <td>Include wins less than $85</td>
         </tr>
+        <tr>
+            <td>
+                <select id="data_source" name="data_source">
+                    <option value="csv">CSV</option>
+                    <option value="db">DB</option>
+                </select>
+            </td>
+            <td>Data Source</td>
+        </tr>
     </table>
 
     <br><br><br>
@@ -80,7 +89,7 @@
             <td><div id="total_spent_on_tickets"></div></td>
         </tr>
         <tr>
-            <td>Net Win/Loss:</td>
+            <td>Overall Net Win/Loss:</td>
             <td><div id="net_win_loss"></div></td>
         </tr>
     </table>
