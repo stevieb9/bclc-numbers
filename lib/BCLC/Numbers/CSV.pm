@@ -4,7 +4,6 @@ use warnings;
 use strict;
 
 use Carp qw(croak);
-use Data::Dumper;
 
 our $VERSION = '0.01';
 
