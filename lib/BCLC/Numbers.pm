@@ -13,7 +13,7 @@ use Number::Format qw(:subs :vars);
 my $db_file = 'data/649.db';
 my $db = BCLC::Numbers::DB->new($db_file);
 
-my $payout_table = _payout_table();
+my $payout_table = payout_table();
 
 get '/' => sub {
     return template 'main';
@@ -25,31 +25,81 @@ get '/fetch_data/:params' => sub {
     my $numbers = $params->{numbers};
     my $display_all = $params->{display_all};
 
-    return to_json fetch($numbers, $display_all);
+    return to_json fetch_data($numbers, $display_all);
 };
 
-sub _filter {
+sub calculate_win_value {
     my ($draw) = @_;
 
-    if ($draw->{'SEQUENCE NUMBER'} != 0 || $draw->{'DRAW NUMBER'} > 3620){
-        return 1;
+    my $payout_key = $draw->{NUMBER_MATCHES};
+
+    if ($payout_key && ($payout_key == 2 || $payout_key == 5)){
+        if ($draw->{BONUS_MATCH}){
+            $payout_key .= '+';
+        }
     }
 
-    return 0;
+    return $payout_table->{$payout_key};
 }
 
-sub fetch {
+sub compile_data {
+    my ($all_draws, $display_all) = @_;
+
+    my @winning_draws;
+    my $total_spent_on_tickets;
+    my $total_number_payout;
+
+    for my $draw (@$all_draws) {
+
+        $total_spent_on_tickets += ticket_price($draw);
+
+        next if $draw->{NUMBER_MATCHES} < 2;
+
+        $total_number_payout += draw_payout($draw);
+
+        if ($display_all){
+            push @winning_draws, $draw;
+        }
+        elsif ($draw->{NUMBER_MATCHES} >= 4){
+            # $85+
+            push @winning_draws, $draw;
+        }
+    }
+
+    my $net_win_loss
+      = convert_to_dollar($total_number_payout - $total_spent_on_tickets);
+
+    my $data = {
+        winning_draws     => \@winning_draws,
+        total_spent_on_tickets => convert_to_dollar($total_spent_on_tickets),
+        total_number_payout => convert_to_dollar($total_number_payout),
+        net_win_loss => $net_win_loss,
+        total_draw_income => undef,
+    };
+
+    return $data;
+}
+
+sub convert_to_dollar {
+    my ($int) = @_;
+    return format_price($int //= 0, 2, '$');
+}
+
+sub draw_payout {
+    my ($draw) = @_;
+    return calculate_win_value($draw);
+}
+
+sub fetch_data {
     my ($player_numbers, $display_all) = @_;
 
-    my $results = $db->retrieve(
-        table     => 'historical',
-    );
+    my $results = $db->retrieve(table => 'historical');
 
     my @all_draws;
 
     for my $draw (@$results){
 
-        next if _filter($draw);
+        next if filter($draw);
 
         my %winning_numbers;
         my $bonus_number;
@@ -76,88 +126,28 @@ sub fetch {
 
         if ($draw->{NUMBER_MATCHES}){
             $draw->{WIN_AMOUNT}
-              = _convert_to_dollar(_calculate_win_value($draw));
+              = convert_to_dollar(calculate_win_value($draw));
         }
 
         push @all_draws, $draw;
     }
 
-    my $aggregate_data = _tally_data(\@all_draws, $display_all);
+    my $aggregate_data = compile_data(\@all_draws, $display_all);
 
     return $aggregate_data;
 }
 
-sub _convert_to_dollar {
-    my ($int) = @_;
-    return format_price($int //= 0, 2, '$');
-}
+sub filter {
+    my ($draw) = @_;
 
-sub _tally_data {
-    my ($all_draws, $display_all) = @_;
-
-    my @winning_draws;
-    my $total_spent_on_tickets;
-    my $total_number_payout;
-
-    for my $draw (@$all_draws) {
-
-        $total_spent_on_tickets += _ticket_price($draw);
-
-        next if $draw->{NUMBER_MATCHES} < 2;
-
-        $total_number_payout += _draw_payout($draw);
-
-        if ($display_all){
-            push @winning_draws, $draw;
-        }
-        elsif ($draw->{NUMBER_MATCHES} >= 4){
-            # $85+
-            push @winning_draws, $draw;
-        }
+    if ($draw->{'SEQUENCE NUMBER'} != 0 || $draw->{'DRAW NUMBER'} > 3620){
+        return 1;
     }
 
-    my $net_win_loss
-      = _convert_to_dollar($total_number_payout - $total_spent_on_tickets);
-
-    my $data = {
-        winning_draws     => \@winning_draws,
-        total_spent_on_tickets => _convert_to_dollar($total_spent_on_tickets),
-        total_number_payout => _convert_to_dollar($total_number_payout),
-        net_win_loss => $net_win_loss,
-        total_draw_income => undef,
-    };
-
-    return $data;
+    return 0;
 }
 
-sub _draw_payout {
-    my ($draw) = @_;
-    return _calculate_win_value($draw);
-}
-
-sub _calculate_win_value {
-    my ($draw) = @_;
-
-    my $payout_key = $draw->{NUMBER_MATCHES};
-
-    if ($payout_key && ($payout_key == 2 || $payout_key == 5)){
-        $payout_key . '+' if $draw->{BONUS_MATCH};
-    }
-
-    return $payout_table->{$payout_key};
-}
-
-sub _ticket_price {
-    my ($draw) = @_;
-
-    my $draw_number = $draw->{'DRAW NUMBER'};
-
-    return 1 if $draw_number <= 2124;
-    return 2 if $draw_number <= 2989;
-    return 3;
-}
-
-sub _payout_table {
+sub payout_table {
     return {
         '2'  => 3,
         '2+' => 5,
@@ -167,6 +157,16 @@ sub _payout_table {
         '5+' => 250000,
         '6'  => 5000000,
     };
+}
+
+sub ticket_price {
+    my ($draw) = @_;
+
+    my $draw_number = $draw->{'DRAW NUMBER'};
+
+    return 1 if $draw_number <= 2124;
+    return 2 if $draw_number <= 2989;
+    return 3;
 }
 
 1;
