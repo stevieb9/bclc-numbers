@@ -25,7 +25,7 @@ isa_ok $db, 'BCLC::Numbers::DB', "object is in the correct class";
 { # db access
     my $sth;
 
-    $sth = $db->db->prepare(
+    $sth = $db->_db->prepare(
         #    "SELECT * FROM historical"
         "SELECT * FROM historical where [DRAW NUMBER] = ?"
     );

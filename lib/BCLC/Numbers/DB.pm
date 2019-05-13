@@ -41,7 +41,7 @@ sub retrieve {
         croak "retrieve() requires a table name sent in...";
     }
 
-    my $sth = $self->db->prepare("SELECT * FROM $table");
+    my $sth = $self->_db->prepare("SELECT * FROM $table");
 
     $sth->execute;
 
