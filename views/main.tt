@@ -15,10 +15,6 @@
             <th colspan="2" align="center">Options</th>
         </tr>
         <tr>
-            <td><input type="checkbox" id="display_all"></td>
-            <td>Include wins less than $85</td>
-        </tr>
-        <tr>
             <td>
                 <select id="data_source" name="data_source">
                     <option value="csv">CSV</option>
@@ -26,6 +22,14 @@
                 </select>
             </td>
             <td>Data Source</td>
+        </tr>
+        <tr>
+            <td><input type="checkbox" id="help"></td>
+            <td>Display UI Help</td>
+        </tr>
+        <tr>
+            <td><input type="checkbox" id="display_all"></td>
+            <td>Include wins less than $85</td>
         </tr>
     </table>
 
@@ -64,7 +68,15 @@
     <div id="base_warning" class="warning">All numbers must be between 1 and 49, and must be unique!</div>
     <div id="populate_warning" class="warning">All six fields must be populated before submitting!</div>
     <div id="no_results_warning" class="warning">No tickets won $85 or more with these numbers.</div>
-
+    <div id="help_info" class="info">
+        <ul>
+            <li>All inputs, fields and results are dynamic. There is no submit button for performing changes or lookups</li>
+            <li>The data source can be switched at any time. After it's been changed, the next result set will use the new source</li>
+            <li>Warning messages are dynamic, and will be displayed as you type in a field, or leave a field area</li>
+            <li>As number boxes are typed in, the individual box border will highlight either green or red (red is invalid, and a warning will be displayed</li>
+            <li>Use the Reset/Clear button to empty all fields and flush existing settings and results</li>
+        </ul>
+    </div>
     <br><br>
 
     <table id="results_table" border="1">

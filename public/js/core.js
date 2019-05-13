@@ -5,6 +5,8 @@ var lotto_nums = {};
 var base_warning;
 var populate_warning;
 var no_results_warning;
+var help;
+var help_info;
 
 var results_table;
 var totals_table;
@@ -16,6 +18,8 @@ $(document).ready(function(){
     base_warning = $("#base_warning");
     populate_warning = $("#populate_warning");
     no_results_warning = $("#no_results_warning");
+    help = $("#help");
+    help_info = $("#help_info");
 
     results_table = $("#results_table");
     totals_table = $("#totals_table");
@@ -27,6 +31,7 @@ $(document).ready(function(){
     base_warning.hide();
     populate_warning.hide();
     no_results_warning.hide();
+    help_info.hide();
 
     results_table.hide();
     totals_table.hide();
@@ -51,6 +56,10 @@ $(document).ready(function(){
     display_all.on("change", function(){
         display_data();
     });
+
+    help.on("change", function(){
+        help.prop("checked") ? help_info.show() : help_info.hide();
+    })
 });
 
 function display_data () {
