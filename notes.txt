@@ -38,4 +38,4 @@
 * conflicting info: first line item states return dates with winnings
   ``more than'' $85, but a latter note states "$85 or more"
 * numbers with no results: 22 19 47 7 45 44
-
+* numbers with no results: 4 8 15 16 23 42
