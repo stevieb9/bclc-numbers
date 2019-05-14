@@ -99,6 +99,19 @@ function display_data () {
                 var total_number_payout = json["total_number_payout"];
                 var net_win_loss = json["net_win_loss"];
 
+                var error = json["error"];
+                var error_msg = json["error_msg"];
+
+                var backend_error_message = $("#backend_error_message");
+
+                if (error){
+                    $("#error_message").text(error_msg);
+                    backend_error_message.show()
+                }
+                else {
+                    backend_error_message.hide();
+                }
+
                 jQuery.each(winning_draws, function (index, draw) {
                     $("#results_table tr:last").after(
                         "<tr>" +

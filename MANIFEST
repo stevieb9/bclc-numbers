@@ -1,9 +1,36 @@
+bin/app.pl
 Changes
+'Code Challenge BCLC.pdf'
+data/649.csv
+data/649.db
+docs/BCLC-Numbers-CSV.html
+docs/BCLC-Numbers-CSV.md
+docs/BCLC-Numbers-DB.html
+docs/BCLC-Numbers-DB.md
+docs/BCLC-Numbers.html
+docs/BCLC-Numbers.md
+docs/core-js.pod
+docs/core.js.html
+docs/core.js.md
 lib/BCLC/Numbers.pm
+lib/BCLC/Numbers/CSV.pm
+lib/BCLC/Numbers/DB.pm
+LICENSE
 Makefile.PL
 MANIFEST			This list of files
+MANIFEST.SKIP
+notes.txt
+pod2htmd.tmp
+public/css/core.css
+public/js/core.js
 README
+README.md
 t/00-load.t
+t/05-db.t
+t/10-ticket_price.t
+t/15-csv.t
+t/20-validation.t
 t/manifest.t
 t/pod-coverage.t
 t/pod.t
+views/main.tt

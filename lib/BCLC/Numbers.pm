@@ -73,10 +73,31 @@ sub fetch_data {
 
         $bonus_number = $draw->{'BONUS NUMBER'};
 
+        my %validate_numbers;
+        my $backend_error = 0;
+
         my $match_count = 0;
         my $match_bonus = 0;
 
         for my $player_number (@$player_numbers){
+            if (! $validate_numbers{$player_number}){
+                $validate_numbers{$player_number} = 1;
+            }
+            else {
+                $backend_error = 1;
+            }
+
+            $backend_error = 1 if $player_number > 49;
+
+            if ($backend_error){
+                return {
+                    error     => 1,
+                    error_msg =>
+                        "One or more numbers are either out of range, " .
+                        "or is a duplicate. Please hit the Reset " .
+                        "and try again!",
+                }
+            }
             if ($winning_numbers{$player_number}){
                 $match_count++;
             }
@@ -95,6 +116,12 @@ sub fetch_data {
     }
 
     my $aggregate_data = _compile_data(\@valid_draws, $display_all);
+
+    $aggregate_data->{error} = 0;
+
+    # tag the data with its source
+
+    $aggregate_data->{data_source} = $csv_source ? 'CSV' : 'DB';
 
     return $aggregate_data;
 }
@@ -279,6 +306,10 @@ Optional, bool: Set to C<true> (C<1>), and we'll read our draw information from
 BCLC's Lotto 649 historical CSV file directly. Send in C<false> (C<0>) to
 read from a pre-compiled SQLite database containing the contents of the CSV.
 Defaults to C<true>.
+
+Return: Hash Reference. If any errors occurred, you'll receive two key/value
+pairs: C<error => 1, error_message => "string">. Otherwise you'll receive a
+valid data-filled href ready for processing.
 
 =head2 filter($draw)
 
