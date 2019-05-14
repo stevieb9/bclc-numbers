@@ -1,4 +1,4 @@
-<html>
+<html xmlns="http://www.w3.org/1999/html">
 
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -10,56 +10,41 @@
 </head>
 
 <body>
-    <table>
-        <tr>
-            <th colspan="2" align="center">Options</th>
-        </tr>
-        <tr>
-            <td>
-                <select id="data_source" name="data_source">
-                    <option value="csv">CSV</option>
-                    <option value="db">DB</option>
-                </select>
-            </td>
-            <td>Data Source</td>
-        </tr>
-        <tr>
-            <td><input type="checkbox" id="help"></td>
-            <td>Display UI Help</td>
-        </tr>
-        <tr>
-            <td><input type="checkbox" id="display_all"></td>
-            <td>Include wins less than $85</td>
-        </tr>
-    </table>
+    <div class="navbar">
+        <div class="dropdown">
+            <button class="dropbtn">Options
+                <i class="fa fa-caret-down"></i>
+            </button>
+            <div class="dropdown-content">
+                 <label>
+                    <select id="data_source" name="data_source">
+                        <option value="csv">CSV</option>
+                        <option value="db">DB</option>
+                    </select>
+                    Data source
+                </label><br>
+                <label><input type="checkbox" id="help" text="Display help">Display UI help</label><br>
+                <label><input type="checkbox" id="display_all">Include wins less than $85</label><br>
+            </div>
+        </div>
+    </div>
 
     <br><br><br>
 
     <table class="top">
+        <th colspan="6" align="center">Enter six unique numbers</th>
         <tr>
-            <td>
-                <div id="numbers">
-                    <table class="inner">
-                        <th colspan="6" align="center">Enter six unique numbers</th>
-                        <tr>
-                        </tr>
-                        <tr>
-                            <td style="text-align: center;"><input type="text" id="num1" size="4" maxlength="2" class="number_field"></td>
-                            <td style="text-align: center;"><input type="text" id="num2" size="4" maxlength="2" class="number_field"></td>
-                            <td style="text-align: center;"><input type="text" id="num3" size="4" maxlength="2" class="number_field"></td>
-                            <td style="text-align: center;"><input type="text" id="num4" size="4" maxlength="2" class="number_field"></td>
-                            <td style="text-align: center;"><input type="text" id="num5" size="4" maxlength="2" class="number_field"></td>
-                            <td style="text-align: center;"><input type="text" id="num6" size="4" maxlength="2" class="number_field"></td>
-                        </tr>
-                    </table>
-                </div>
-            </td>
         </tr>
-        <tr></tr>
-        <tr></tr>
-        <tr></tr>
         <tr>
-            <td colspan="6" align="center"><button onClick="window.location.href=window.location.href">Reset/Clear</button></td>
+            <td style="text-align: center;"><input type="text" id="num1" size="4" maxlength="2" class="number_field"></td>
+            <td style="text-align: center;"><input type="text" id="num2" size="4" maxlength="2" class="number_field"></td>
+            <td style="text-align: center;"><input type="text" id="num3" size="4" maxlength="2" class="number_field"></td>
+            <td style="text-align: center;"><input type="text" id="num4" size="4" maxlength="2" class="number_field"></td>
+            <td style="text-align: center;"><input type="text" id="num5" size="4" maxlength="2" class="number_field"></td>
+            <td style="text-align: center;"><input type="text" id="num6" size="4" maxlength="2" class="number_field"></td>
+        </tr>
+        <tr>
+            <td colspan="6" align="center"><br /><button onClick="window.location.href=window.location.href">Reset/Clear</button></td>
         </tr>
     </table>
 
@@ -81,8 +66,8 @@
     </div>
     <br><br>
 
-    <table id="results_table" border="1">
-        <tr>
+    <table id="results_table" border="1" class="output">
+        <tr class="heading">
             <td>Date</td>
             <td>Win Amount</td>
             <td>Draw Number</td>
@@ -93,17 +78,18 @@
 
     <br><br>
 
-    <table id="totals_table" border="1">
+    <table id="totals_table" border="1" class="output">
+        <th colspan="2" class="heading">Aggregate Totals</th>
         <tr>
-            <td>Above Numbers Won:</td>
+            <td><div class="side_heading">Above Numbers Won:</div></td>
             <td><div id="total_won"></div></td>
         </tr>
         <tr>
-            <td>Total Spent On Tickets:</td>
+            <td><div class="side_heading">Total Spent On Tickets:</div></td>
             <td><div id="total_spent_on_tickets"></div></td>
         </tr>
         <tr>
-            <td>Overall Net Win/Loss:</td>
+            <td><div class="side_heading">Overall Net Win/Loss:</div></td>
             <td><div id="net_win_loss"></div></td>
         </tr>
     </table>

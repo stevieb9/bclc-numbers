@@ -38,7 +38,8 @@ previously entered numbers, simply click the `Reset/Clear` button
 
 ##Options
 
-There are a few options available on the page:
+There are a few options available on the page. Simply hover over the "Options"
+in the top menu bar to access them.
 
 ####Data Source
 
