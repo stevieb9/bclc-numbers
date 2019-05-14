@@ -1,0 +1,64 @@
+<?xml version="1.0" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title></title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<link rev="made" href="mailto:spek@scelia.(none)" />
+</head>
+
+<body>
+
+
+
+<ul id="index">
+  <li><a href="#NAME">NAME</a></li>
+  <li><a href="#DESCRIPTION">DESCRIPTION</a></li>
+  <li><a href="#FUNCTIONS">FUNCTIONS</a>
+    <ul>
+      <li><a href="#display_data">display_data</a></li>
+      <li><a href="#validate_number-id-num">validate_number(id, num)</a></li>
+    </ul>
+  </li>
+  <li><a href="#AUTHOR">AUTHOR</a></li>
+  <li><a href="#LICENSE-AND-COPYRIGHT">LICENSE AND COPYRIGHT</a></li>
+</ul>
+
+<h1 id="NAME">NAME</h1>
+
+<p>BCLC::Numbers::core.js - Provides front-end UI logic for the <a>BCLC::Numbers</a> <a>Dancer2</a> web application</p>
+
+<h1 id="DESCRIPTION">DESCRIPTION</h1>
+
+<p>Automation and REST API client which takes care of the various dynamic UI components.</p>
+
+<h1 id="FUNCTIONS">FUNCTIONS</h1>
+
+<h2 id="display_data">display_data</h2>
+
+<p>Compiles the REST API call parameters, performs user-side number validation, retrieves the relevant data and information from the REST API, and is responsible for hiding and displaying the various data tables dynamically, on the fly.</p>
+
+<p>Takes no parameters, returns <code>false</code> while not displaying anything to the page if any errors are found.</p>
+
+<h2 id="validate_number-id-num">validate_number(id, num)</h2>
+
+<p>Maintains a global lottery numbers object (hash containing the page element ID as the keys, and the lotto number associate it with it as the value), and verifies that the numbers are a) within the range of 1-49, and ensures there are no duplicates.</p>
+
+<p>Return: <code>true</code> if the number is clean, and <code>false</code> if it&#39;s either out of range, or a duplicate of a previously supplied number.</p>
+
+<h1 id="AUTHOR">AUTHOR</h1>
+
+<p>Steve Bertrand, <code>&lt;steve.bertrand at gmail.com&gt;</code></p>
+
+<h1 id="LICENSE-AND-COPYRIGHT">LICENSE AND COPYRIGHT</h1>
+
+<p>Copyright 2019 Steve Bertrand.</p>
+
+<p>Released under the Apache License, Version 2</p>
+
+
+</body>
+
+</html>
+
+
