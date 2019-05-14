@@ -324,7 +324,7 @@ the array reference from the C<retrieve()> function from either L<BCLC::DB> or
 L<BCLC::CSV>.
 
 Return: C<1> (C<true>) if the draw sent in should be filtered out/skipped, and
-C<0> (C<false) if it's a valid draw.
+C<0> (C<false>) if it's a valid draw.
 
 =head2 payout_table
 

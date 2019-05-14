@@ -1,5 +1,4 @@
 bin/app.pl
-Changes
 'Code Challenge BCLC.pdf'
 data/649.csv
 data/649.db
@@ -23,13 +22,13 @@ notes.txt
 pod2htmd.tmp
 public/css/core.css
 public/js/core.js
-README
 README.md
 t/00-load.t
 t/05-db.t
 t/10-ticket_price.t
 t/15-csv.t
 t/20-validation.t
+t/25-rest_api.t
 t/manifest.t
 t/pod-coverage.t
 t/pod.t
