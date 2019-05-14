@@ -1,0 +1,41 @@
+=head1 NAME
+
+BCLC::Numbers::core.js - Provides front-end UI logic for the L<BCLC::Numbers> L<Dancer2> web
+application
+
+=head1 DESCRIPTION
+
+Automation and REST API client which takes care of the various dynamic UI
+components.
+
+=head1 FUNCTIONS
+
+=head2 display_data
+
+Compiles the REST API call parameters, performs user-side number validation,
+retrieves the relevant data and information from the REST API, and is
+responsible for hiding and displaying the various data tables dynamically, on
+the fly.
+
+Takes no parameters, returns C<false> while not displaying anything to the page
+if any errors are found.
+
+=head2 validate_number(id, num)
+
+Maintains a global lottery numbers object (hash containing the page element ID
+as the keys, and the lotto number associate it with it as the value), and
+verifies that the numbers are a) within the range of 1-49, and ensures there
+are no duplicates.
+
+Return: C<true> if the number is clean, and C<false> if it's either out of
+range, or a duplicate of a previously supplied number.
+
+=head1 AUTHOR
+
+Steve Bertrand, C<< <steve.bertrand at gmail.com> >>
+
+=head1 LICENSE AND COPYRIGHT
+
+Copyright 2019 Steve Bertrand.
+
+Released under the Apache License, Version 2
