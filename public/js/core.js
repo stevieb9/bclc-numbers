@@ -125,6 +125,7 @@ function display_data () {
                 });
 
                 if (winning_draws.length > 0) {
+                    no_results_warning.hide();
                     results_table.show();
                 }
                 else {
