@@ -70,28 +70,28 @@ checkbox to display all wins, regardless of the value.
 ## Documentation
 
 The various code files each have their own documentation in either markdown or
-html format, in the `docs/md` and `docs/html` directories respectively.
+HTML format, in the `docs/md` and `public/docs` directories respectively.
 Normally, Perl documentation is written in POD format, viewed cleanly on
 MetaCPAN, but alas; this software is not published publicly. The POD format is
 however available in code form, within the respective module files (there's
 also a POD file for the `core.js` script, in the `docs/pod` directory).
 
-##### [BCLC::Numbers.pm](docs/md/BCLC-Numbers.md) ([HTML format](docs/html/BCLC-Numbers.html))
+##### [BCLC::Numbers.pm](docs/md/BCLC-Numbers.md) ([HTML format](http://24.67.48.97:5000/docs/BCLC-Numbers.html))
 
 This module houses the core REST API backend, and performs all of the
 calculations and backend validation for the project.
 
-##### [BCLC::Numbers::CSV](docs/md/BCLC-Numbers-CSV.md) ([HTML format](docs/html/BCLC-Numbers-CSV.html))
+##### [BCLC::Numbers::CSV](docs/md/BCLC-Numbers-CSV.md) ([HTML format](http://24.67.48.97:5000/docs/BCLC-Numbers-CSV.html))
 
 The `CSV` module/class is responsible for reading in the historical CSV file,
 and returning the aggregated data.
 
-##### [BCLC::Numbers::DB](docs/md/BCLC-Numbers-DB.md) ([HTML format](docs/html/BCLC-Numbers-DB.html))
+##### [BCLC::Numbers::DB](docs/md/BCLC-Numbers-DB.md) ([HTML format](http://24.67.48.97:5000/docs/BCLC-Numbers-DB.html))
 
 The `DB` module/class is responsible for performing the queries on the SQLite
 database and returning the aggregated data.
 
-##### [core.js](docs/md/core.js.md) ([HTML format](docs/html/core.js.html))
+##### [core.js](docs/md/core.js.md) ([HTML format](http://24.67.48.97:5000/docs/BCLC-Numbers.html))
 
 This is the front-end, user-side script that performs all of the necessary
 dynamic rendering of the UI, as well as provides live-time validation and
