@@ -88,6 +88,7 @@ sub fetch_data {
             }
 
             $backend_error = 1 if $player_number > 49;
+            $backend_error = 1 if $player_number < 1;
 
             if ($backend_error){
                 return {
