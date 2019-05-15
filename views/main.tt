@@ -7,6 +7,7 @@
     <link rel="stylesheet" type="text/css" href="css/core.css">
 </head>
 
+<html>
 <body>
     <div class="navbar">
         <div class="dropdown">
@@ -59,6 +60,7 @@
             <li>Warning messages are dynamic, and will be displayed as you type in a field, or leave a field area</li>
             <li>As number boxes are typed in, the individual box border will highlight either green or red (red is invalid, and a warning will be displayed</li>
             <li>Use the Reset/Clear button to empty all fields and flush existing settings and results</li>
+            <li>If for any reason the UI "locks up" (ie. fails to display the results table), simply click the Reset/Clear button</li>
         </ul>
     </div>
     <br><br>
