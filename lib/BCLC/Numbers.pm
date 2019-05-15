@@ -80,6 +80,8 @@ sub fetch_data {
         my $match_bonus = 0;
 
         for my $player_number (@$player_numbers){
+            next if ! defined $player_number;
+
             if (! $validate_numbers{$player_number}){
                 $validate_numbers{$player_number} = 1;
             }
@@ -88,7 +90,6 @@ sub fetch_data {
             }
 
             $backend_error = 1 if $player_number > 49;
-            $backend_error = 1 if $player_number < 1;
 
             if ($backend_error){
                 return {
