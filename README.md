@@ -76,22 +76,22 @@ MetaCPAN, but alas; this software is not published publicly. The POD format is
 however available in code form, within the respective module files (there's
 also a POD file for the `core.js` script, in the `docs/pod` directory).
 
-##### [BCLC::Numbers.pm](docs/md/BCLC-Numbers.md) ([HTML format](http://24.67.48.97:5000/docs/BCLC-Numbers.html))
+##### [BCLC::Numbers](http://24.67.48.97:5000/docs/BCLC-Numbers-DB.html) [Markdown format](docs/md/BCLC-Numbers.md))
 
 This module houses the core REST API backend, and performs all of the
 calculations and backend validation for the project.
 
-##### [BCLC::Numbers::CSV](docs/md/BCLC-Numbers-CSV.md) ([HTML format](http://24.67.48.97:5000/docs/BCLC-Numbers-CSV.html))
+##### [BCLC::Numbers::CSV](http://24.67.48.97:5000/docs/BCLC-Numbers-DB.html) [Markdown format](docs/md/BCLC-Numbers-CSV.md))
 
 The `CSV` module/class is responsible for reading in the historical CSV file,
 and returning the aggregated data.
 
-##### [BCLC::Numbers::DB](docs/md/BCLC-Numbers-DB.md) ([HTML format](http://24.67.48.97:5000/docs/BCLC-Numbers-DB.html))
+##### [BCLC::Numbers::DB](http://24.67.48.97:5000/docs/BCLC-Numbers-DB.html) [Markdown format](docs/md/BCLC-Numbers-DB.md))
 
 The `DB` module/class is responsible for performing the queries on the SQLite
 database and returning the aggregated data.
 
-##### [core.js](docs/md/core.js.md) ([HTML format](http://24.67.48.97:5000/docs/BCLC-Numbers.html))
+##### [core.js](http://24.67.48.97:5000/docs/core.js.html) [Markdown format](docs/md/core.js.md))
 
 This is the front-end, user-side script that performs all of the necessary
 dynamic rendering of the UI, as well as provides live-time validation and
