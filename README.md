@@ -9,6 +9,7 @@ front-end that allows a user to input the six numbers related to BCLC's Lotto
 - [Installation](#installation)
 - [Using the UI](#using-the-ui)
 - [Options](#options)
+- [Documentation](#documentation)
 
 ## Installation
 
@@ -24,7 +25,7 @@ front-end that allows a user to input the six numbers related to BCLC's Lotto
 
 ## Using the UI
 
-- Go to the web page `http://localhost:5000` (replace `localhost` with your 
+- Go to the web page [http://localhost:5000](http://localhost:5000) (replace `localhost` with your 
 server's IP/DNS name if required)
 - Type in six unique number into each one of the input text boxes. The border of
 each box will turn green if the number is valid, and red if not. Warnings will
@@ -65,6 +66,38 @@ This checkbox toggles a basic list of help items on the screen dynamically.
 
 By default, we list in the results, wins that are $85 and up. Check this
 checkbox to display all wins, regardless of the value.        
+
+## Documentation
+
+The various code files each have their own documentation in either markdown or
+html format, in the `docs/md` and `docs/html` directories respectively.
+Normally, Perl documentation is written in POD format, viewed cleanly on
+MetaCPAN, but alas; this software is not published publicly. The POD format is
+however available in code form, within the respective module files (there's
+also a POD file for the `core.js` script, in the `docs/pod` directory).
+
+##### [BCLC::Numbers.pm](docs/md/BCLC-Numbers.md) ([HTML format](docs/html/BCLC-Numbers.html))
+
+This module houses the core REST API backend, and performs all of the
+calculations and backend validation for the project.
+
+##### [BCLC::Numbers::CSV](docs/md/BCLC-Numbers-CSV.md) ([HTML format](docs/html/BCLC-Numbers-CSV.html))
+
+The `CSV` module/class is responsible for reading in the historical CSV file,
+and returning the aggregated data.
+
+##### [BCLC::Numbers::DB](docs/md/BCLC-Numbers-DB.md) ([HTML format](docs/html/BCLC-Numbers-DB.html))
+
+The `DB` module/class is responsible for performing the queries on the SQLite
+database and returning the aggregated data.
+
+##### [core.js](docs/md/core.js.md) ([HTML format](docs/html/core.js.html))
+
+This is the front-end, user-side script that performs all of the necessary
+dynamic rendering of the UI, as well as provides live-time validation and
+error/warning reporting directly to the user.
+
+
 
 REQ59847, IS27 Full Stack Developer
 Due date: May 15, 2019 at 1:00 pm Pacitic Time
