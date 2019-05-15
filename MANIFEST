@@ -2,15 +2,11 @@ bin/app.pl
 'Code Challenge BCLC.pdf'
 data/649.csv
 data/649.db
-docs/BCLC-Numbers-CSV.html
-docs/BCLC-Numbers-CSV.md
-docs/BCLC-Numbers-DB.html
-docs/BCLC-Numbers-DB.md
-docs/BCLC-Numbers.html
-docs/BCLC-Numbers.md
-docs/core-js.pod
-docs/core.js.html
-docs/core.js.md
+docs/md/BCLC-Numbers-CSV.md
+docs/md/BCLC-Numbers-DB.md
+docs/md/BCLC-Numbers.md
+docs/md/core.js.md
+docs/pod/core-js.pod
 lib/BCLC/Numbers.pm
 lib/BCLC/Numbers/CSV.pm
 lib/BCLC/Numbers/DB.pm
@@ -19,8 +15,11 @@ Makefile.PL
 MANIFEST			This list of files
 MANIFEST.SKIP
 notes.txt
-pod2htmd.tmp
 public/css/core.css
+public/docs/BCLC-Numbers-CSV.html
+public/docs/BCLC-Numbers-DB.html
+public/docs/BCLC-Numbers.html
+public/docs/core.js.html
 public/js/core.js
 README.md
 t/00-load.t

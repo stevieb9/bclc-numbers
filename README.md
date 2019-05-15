@@ -10,6 +10,7 @@ front-end that allows a user to input the six numbers related to BCLC's Lotto
 - [Using the UI](#using-the-ui)
 - [Options](#options)
 - [Documentation](#documentation)
+- [Test Results](#testing)
 
 ## Installation
 
@@ -97,7 +98,10 @@ This is the front-end, user-side script that performs all of the necessary
 dynamic rendering of the UI, as well as provides live-time validation and
 error/warning reporting directly to the user.
 
+## Test Results
 
+A test result summary can be found [here](http://24.67.48.97:5000/docs/test/test_summary.txt)
+along with the complete [test results](http://24.67.48.97:5000/docs/test/test_results_full.txt).
 
 REQ59847, IS27 Full Stack Developer
 Due date: May 15, 2019 at 1:00 pm Pacitic Time

@@ -3,7 +3,6 @@ Makefile
 *.bak
 *.swp
 *.bak
-test/
 .hg/
 .git/
 MYMETA.*
