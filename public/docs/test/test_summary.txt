@@ -1,0 +1,13 @@
+PERL_DL_NONLAZY=1 "/home/spek/perl5/perlbrew/perls/perl-5.26.1/bin/perl" "-MExtUtils::Command::MM" "-MTest::Harness" "-e" "undef *Test::Harness::Switches; test_harness(0, 'blib/lib', 'blib/arch')" t/*.t
+t/00-load.t .......... ok
+t/05-db.t ............ ok
+t/10-ticket_price.t .. ok
+t/15-csv.t ........... ok
+t/20-validation.t .... ok
+t/25-rest_api.t ...... ok
+t/manifest.t ......... ok
+t/pod-coverage.t ..... ok
+t/pod.t .............. ok
+All tests successful.
+Files=9, Tests=5630, 31 wallclock secs ( 0.56 usr  0.03 sys + 15.82 cusr  0.21 csys = 16.62 CPU)
+Result: PASS
