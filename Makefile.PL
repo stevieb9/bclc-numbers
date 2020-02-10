@@ -19,9 +19,10 @@ WriteMakefile(
     },
     PREREQ_PM => {
         Carp                     => 0,
-        DBI                      => 0,
         Dancer2                  => 0,
         'Dancer2::Core::Request' => 0,
+        DBI                      => 0,
+        'DBD::SQLite'            => 0,
         JSON                     => 0,
         'Number::Format'         => 0,
 
