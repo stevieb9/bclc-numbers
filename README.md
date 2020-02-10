@@ -26,8 +26,7 @@ front-end that allows a user to input the six numbers related to BCLC's Lotto
 
 ## Using the UI
 
-- Go to the web page [http://localhost:5000](http://localhost:5000) (replace `localhost` with your 
-server's IP/DNS name if required)
+- Go to the web page [http://bclc.ddns.net:3000](http://bclc.ddns.net:3000)
 - Type in six unique number into each one of the input text boxes. The border of
 each box will turn green if the number is valid, and red if not. Warnings will
 also be displayed dynamically to explain the specific problem
@@ -77,22 +76,22 @@ MetaCPAN, but alas; this software is not published publicly. The POD format is
 however available in code form, within the respective module files (there's
 also a POD file for the `core.js` script, in the `docs/pod` directory).
 
-##### [BCLC::Numbers](http://24.67.48.97:5000/docs/BCLC-Numbers.html)
+##### [BCLC::Numbers](http://bclc.ddns.net:3000/docs/BCLC-Numbers.html)
 
 This module houses the core REST API backend, and performs all of the
 calculations and backend validation for the project.
 
-##### [BCLC::Numbers::CSV](http://24.67.48.97:5000/docs/BCLC-Numbers-CSV.html)
+##### [BCLC::Numbers::CSV](http://bclc.ddns.net:3000/docs/BCLC-Numbers-CSV.html)
 
 The `CSV` module/class is responsible for reading in the historical CSV file,
 and returning the aggregated data.
 
-##### [BCLC::Numbers::DB](http://24.67.48.97:5000/docs/BCLC-Numbers-DB.html)
+##### [BCLC::Numbers::DB](http://bclc.ddns.net:3000/docs/BCLC-Numbers-DB.html)
 
 The `DB` module/class is responsible for performing the queries on the SQLite
 database and returning the aggregated data.
 
-##### [core.js](http://24.67.48.97:5000/docs/core.js.html)
+##### [core.js](http://bclc.ddns.net:3000/docs/core.js.html)
 
 This is the front-end, user-side script that performs all of the necessary
 dynamic rendering of the UI, as well as provides live-time validation and
@@ -100,9 +99,5 @@ error/warning reporting directly to the user.
 
 ## Test Results
 
-A test result summary can be found [here](http://24.67.48.97:5000/docs/test/test_summary.txt)
-along with the complete [test results](http://24.67.48.97:5000/docs/test/test_results_full.txt).
-
-REQ59847, IS27 Full Stack Developer
-Due date: May 15, 2019 at 1:00 pm Pacitic Time
-For questions, please email: Dea.DeJarisco@gov.bc.ca
+A test result summary can be found [here](http://bclc.ddns.net:3000/docs/test/test_summary.txt)
+along with the complete [test results](http://bclc.ddns.net:3000/docs/test/test_results_full.txt).
